@@ -9,7 +9,7 @@ const FollowSchema = new Schema(
 
 		followerId: {
 			type: Schema.Types.ObjectId,
-			required: true,
+			required: true,  
 		},
 	},
 	{ timestamps: true, collection: 'follows' },
@@ -18,3 +18,4 @@ const FollowSchema = new Schema(
 FollowSchema.index({ followingId: 1, followerId: 1 }, { unique: true });
 
 export default FollowSchema;
+   

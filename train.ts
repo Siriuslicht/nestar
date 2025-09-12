@@ -23,7 +23,7 @@ function reduceNestedArray(arr: any[]): number {
      }
    }
  
-   return sum;
+   return sum; 
  }
  
  console.log(reduceNestedArray([5, [3, [2, 1]], 4])); 

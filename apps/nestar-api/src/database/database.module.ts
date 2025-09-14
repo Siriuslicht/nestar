@@ -23,4 +23,4 @@ export class DatabaseModule {
          console.log("DB is not connected!");
       }
    }
-}
+}       

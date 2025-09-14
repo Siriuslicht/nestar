@@ -14,10 +14,10 @@ const MemberSchema = new Schema({
       default: MemberStatus.ACTIVE,
    },
 
-   MemberAuthType: {
+   memberAuthType: {
       type: String,
       enum: MemberAuthType,
-      default: MemberAuthType.PHONE,
+      default: MemberAuthType.PHONE, 
    },
 
    memberPhone: {

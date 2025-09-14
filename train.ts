@@ -1,6 +1,34 @@
 console.log('Hello, World!');
 
 
+// TASK-ZL:
+
+// Shunday function yozing, u parametrda berilgan stringni 
+// kebab casega otkazib qaytarsin. Bosh harflarni kichik 
+// harflarga ham otkazsin.
+// MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab”
+
+function stringToKebab(str: string): string {
+  let result = "";
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+
+    if (char === " ") {
+      result += "-"; 
+    } else {
+      result += char.toLowerCase();
+    }
+  }
+
+  return result;
+}
+
+const result36 = stringToKebab("I Just Wanted To Stay Down The Road!")
+console.log("stringToKebab:", result36); 
+
+
+
 // TASK-ZK:
 
 // Shunday function yozing, u har soniyada bir
@@ -8,20 +36,20 @@ console.log('Hello, World!');
 //  chop etsin va 5 soniyadan keyin ishini toxtatsin.
 // MASALAN: printNumbers()
 
-function printNumbers(): void {
-  let count: number = 1;
+// function printNumbers(): void {
+//   let count: number = 1;
 
-  const interval: NodeJS.Timeout = setInterval(() => {
-    console.log(count);
-    count++;
+//   const interval: NodeJS.Timeout = setInterval(() => {
+//     console.log(count);
+//     count++;
 
-    if (count > 5) {
-      clearInterval(interval);
-    }
-  }, 1000);
-}
+//     if (count > 5) {
+//       clearInterval(interval);
+//     }
+//   }, 1000);
+// }
 
-printNumbers();
+// printNumbers();
 
 
 // TASK ZJ:

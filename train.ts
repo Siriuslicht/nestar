@@ -1,5 +1,24 @@
 console.log('Hello, World!');
 
+// TASK ZM:
+
+// Shunday function yozing, va bu function parametr
+// sifatida raqamlarni qabul qilsin. Bu function qabul qilingan
+// raqamlarni orqasiga o'girib qaytarsin
+
+// MASALAN: reverseInteger(123456789); return 987654321;
+
+// Yuqoridagi misolda, function kiritilgan raqamlarni orqasiga
+// o'girib (reverse) qilib qaytarmoqda.
+
+
+function reverseInteger(num: number): number {
+  const reversed = num.toString().split("").reverse().join("");
+  return Number(reversed);
+}
+
+console.log(reverseInteger(123456789));
+
 
 // TASK-ZL:
 
@@ -8,24 +27,24 @@ console.log('Hello, World!');
 // harflarga ham otkazsin.
 // MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab”
 
-function stringToKebab(str: string): string {
-  let result = "";
+// function stringToKebab(str: string): string {
+//   let result = "";
 
-  for (let i = 0; i < str.length; i++) {
-    let char = str[i];
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i];
 
-    if (char === " ") {
-      result += "-"; 
-    } else {
-      result += char.toLowerCase();
-    }
-  }
+//     if (char === " ") {
+//       result += "-"; 
+//     } else {
+//       result += char.toLowerCase();
+//     }
+//   }
 
-  return result;
-}
+//   return result;
+// }
 
-const result36 = stringToKebab("I Just Wanted To Stay Down The Road!")
-console.log("stringToKebab:", result36); 
+// const result36 = stringToKebab("I Just Wanted To Stay Down The Road!")
+// console.log("stringToKebab:", result36); 
 
 
 

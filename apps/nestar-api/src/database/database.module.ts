@@ -2,7 +2,7 @@ import { Inject, Module } from '@nestjs/common';
 import { InjectConnection, MongooseModule} from "@nestjs/mongoose";
 import { Connection } from "mongoose";
 
-@Module({
+  @Module({
    imports: [
       MongooseModule.forRootAsync({
          useFactory: () => ({ 
@@ -21,6 +21,6 @@ export class DatabaseModule {
          );
       } else {
          console.log("DB is not connected!");
-      }
+      } 
    }
 }       

@@ -12,12 +12,12 @@ console.log('Hello, World!');
 // o'girib (reverse) qilib qaytarmoqda.
 
 
-function reverseInteger(num: number): number {
-  const reversed = num.toString().split("").reverse().join("");
-  return Number(reversed);
-}
+// function reverseInteger(num: number): number {
+//   const reversed = num.toString().split("").reverse().join("");
+//   return Number(reversed);
+// }
 
-console.log(reverseInteger(123456789));
+// console.log(reverseInteger(123456789));
 
 
 // TASK-ZL:

@@ -36,19 +36,17 @@ export class MemberService  {
 
             if(!response || response.memberStatus === MemberStatus.DELETE) {
                throw new InternalServerErrorException(Message.NO_MEMBER_NICK);
-            }
-            else if (response.memberStatus === MemberStatus.BLOCK) {
-               throw new InternalServerErrorException(Message.BLOCKED_USER)
+            }  else if (response.memberStatus === MemberStatus.BLOCK) {
+               throw new InternalServerErrorException(Message.BLOCKED_USER);
             }
 
             // TODO: Compare Passwords
 
 
-            const isMatch = memberPassword === response.memberPassword;
+            const isMatch = await this.authService.comparePasswords(input.memberPassword, response.memberPassword);
             if(!isMatch) throw new InternalServerErrorException(Message.WRONG_PASSWORD)
             
             return response;
-
 
       
    }

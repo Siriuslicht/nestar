@@ -13,7 +13,7 @@ export class AuthService {
       const salt = await bcrypt.genSalt();
       return await bcrypt.hash(memberPassword, salt);
    }
-
+L
    public async comparePasswords(password: string, hashedPassword: string): Promise<boolean>{
       return await bcrypt.compare(password, hashedPassword);
    }
@@ -22,12 +22,11 @@ export class AuthService {
       console.log("member:", member);
       const payload: T = {  };
 
-      Object.keys(member['_doc'] ? member['_doc'] : member).map((ele) => {
-         payload[`${ele}`] = member[`${ele}`];
+      Object.keys(member['_doc'] ? member['_doc'] : member).map((ele) => {       
       })
 
       delete payload.memberPassword;
-      console.log("payload:",payload);
+      console.log("payload:",payload); 
    return await this.jwtService.signAsync(payload);
 
    }

@@ -1,5 +1,26 @@
 console.log('Hello, World!');
 
+// TASK ZN:
+
+// Shunday function yozing, uni array va number parametri bo'lsin.
+// Function'ning vazifasi ikkinchi parametr'da berilgan raqam, birinchi
+// array parametr'ning indeksi bo'yicha hisoblanib, shu indeksgacha bo'lgan
+// raqamlarni indeksdan tashqarida bo'lgan raqamlar bilan o'rnini
+// almashtirib qaytarsin.
+
+// MASALAN: rotateArray([1, 2, 3, 4, 5, 6], 3); return [5, 6, 1, 2, 3, 4];
+
+function rotateArray(arr, index) {
+   let left = arr.slice(0, index);
+   let right = arr.slice(index);
+ 
+   return right.concat(left);
+ }
+ 
+ console.log(rotateArray([1, 2, 3, 4, 5, 6], 3)); 
+ console.log(rotateArray([10, 20, 30, 40, 50], 2)); 
+ 
+
 // TASK ZM:
 
 // Shunday function yozing, va bu function parametr

@@ -11,6 +11,7 @@ import { MemberType } from '../../libs/enums/member.enum';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { shapeIntoMongoObjectId } from '../../libs/config';
+import { WithoutGuard } from '../auth/guards/without.guard';
 
 @Resolver()
 export class MemberResolver {
@@ -20,17 +21,17 @@ export class MemberResolver {
    public async signup(@Args('input') input: MemberInput): Promise<Member>{
          console.log("Mutation: signup");
          console.log("input:", input)
-         return this.memberService.signup(input);
-      
+         return this.memberService.signup(input); 
    }
+
 
    @Mutation(() => Member ) 
    public async login(@Args('input') input: LoginInput): Promise<Member>{
 
          console.log("Mutation: login");
          return this.memberService.login(input);
-
    }
+
 
    @UseGuards(AuthGuard)
    @Query(() => String)
@@ -39,6 +40,7 @@ export class MemberResolver {
       console.log("memberNick:", memberNick);
       return `Hi ${memberNick}`;
    }
+
 
    @Roles(MemberType.USER, MemberType.AGENT)
    @UseGuards(RolesGuard)
@@ -60,32 +62,15 @@ export class MemberResolver {
       delete input._id
       return this.memberService.updateMember(memberId, input);
    }
+   
 
-
-   /// GET MEMBER
-
-
-
-
-
-
-
+   @UseGuards(WithoutGuard)
    @Query(() => Member)
-   public async getMember(@Args("memberId") input : string): Promise<Member> {
+   public async getMember(@Args("memberId") input : string, @AuthMember('_id') memberId: ObjectId ): Promise<Member> {
       console.log("Query: getMember!");
-
       const targetId = shapeIntoMongoObjectId(input);
-      return this.memberService.getMember(targetId);
+      return this.memberService.getMember(memberId, targetId);
    }   
-
-
-
-
-
-
-
-
-
 
 
    /** ADMIN */
@@ -98,6 +83,7 @@ export class MemberResolver {
       console.log("Mutation getAllMembersByAdmin!");  
       return await this.memberService.getAllMembersByAdmin();
    }
+
 
    public async updateMemberByAdmin(): Promise<string> {
       console.log("Mutation updateMemberByAdmin!");

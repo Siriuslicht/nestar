@@ -12,7 +12,7 @@ export class ViewService {
       const viewExist = await this.checkViewExistence(input);
       if(!viewExist) {
          console.log("- New View Insert -");
-         return await this.viewModel.create(input);
+         return await this.viewModel.create(input); 
       } else return null;
       return null;           
    }

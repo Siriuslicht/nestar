@@ -1,5 +1,30 @@
 console.log('Hello, World!');
 
+
+function areParenthesesBalanced(str: string): boolean {
+  let balance = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+
+    if (char === "(") {
+      balance++;
+    } else if (char === ")") {
+      balance--;
+    }
+
+    if (balance < 0) {
+      return false;
+    }
+  }
+
+  return balance === 0;
+}
+
+console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda")); 
+console.log(areParenthesesBalanced("((test)")); 
+console.log(areParenthesesBalanced(")(")); 
+
 // TASK ZN:
 
 // Shunday function yozing, uni array va number parametri bo'lsin.
@@ -10,15 +35,15 @@ console.log('Hello, World!');
 
 // MASALAN: rotateArray([1, 2, 3, 4, 5, 6], 3); return [5, 6, 1, 2, 3, 4];
 
-function rotateArray(arr, index) {
-   let left = arr.slice(0, index);
-   let right = arr.slice(index);
+// function rotateArray(arr, index) {
+//    let left = arr.slice(0, index);
+//    let right = arr.slice(index);
  
-   return right.concat(left);
- }
+//    return right.concat(left);
+//  }
  
- console.log(rotateArray([1, 2, 3, 4, 5, 6], 3)); 
- console.log(rotateArray([10, 20, 30, 40, 50], 2)); 
+//  console.log(rotateArray([1, 2, 3, 4, 5, 6], 3)); 
+//  console.log(rotateArray([10, 20, 30, 40, 50], 2)); 
  
 
 // TASK ZM:

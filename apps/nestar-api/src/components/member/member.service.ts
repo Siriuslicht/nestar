@@ -7,7 +7,7 @@ import { MemberStatus, MemberType } from '../../libs/enums/member.enum';
 import { Direction, Message } from '../../libs/enums/common.enum';
 import { AuthService } from '../auth/auth.service';
 import { MemberUpdate } from '../../libs/dto/member/member.update';
-import { T } from '../../libs/types/common';
+import { StatisticsModifier, T } from '../../libs/types/common';
 import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
 
@@ -24,7 +24,6 @@ export class MemberService  {
       input.memberPassword = await this.authService.hashPassword(input.memberPassword);
          try {
             const result = await this.memberModel.create(input);
-            // Authentication via TOKEN
             result.accessToken = await this.authService.createToken(result);
             return result;      
          } catch(err) {
@@ -159,6 +158,17 @@ export class MemberService  {
       return result ;
    }
 
+   public async memberStatsEditor(input: StatisticsModifier): Promise<Member> {
+      console.log("executed via Property");
+      const { _id, targetKey, modifier} = input;
+      return await this.memberModel.findOneAndUpdate(
+         _id,
+         { 
+            $inc: {[targetKey]: modifier},
+         },
+         {new: true},
+      ).exec();
+   } 
 
 
 

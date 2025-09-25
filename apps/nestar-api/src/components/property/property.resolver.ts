@@ -1,13 +1,31 @@
- import { Resolver } from '@nestjs/graphql';
+ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { PropertyService } from './property.service';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Property } from '../../libs/dto/property/property';
+import { PropertyInput } from '../../libs/dto/property/property.input';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { UseGuards } from '@nestjs/common';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { MemberType } from '../../libs/enums/member.enum';
+import { ObjectId } from 'mongoose';
+import { AuthMember } from '../auth/decorators/authMember.decorator';
+
 
 @Resolver()
 export class PropertyResolver {
-   constructor(
-       @InjectModel("Property") private readonly propertyModel: Model<null>
-   ){}
+   constructor(private readonly propertyService: PropertyService){}
       
+   @Roles( MemberType.AGENT)
+   @UseGuards(RolesGuard)
+   @Mutation(() => Property)
+   public async createProperty(
+      @Args('input') input: PropertyInput,
+      @AuthMember("_id") memberId: ObjectId
+   ): Promise<Property>{
+      console.log("Mutation: createProperty");
+      input.memberId = memberId;
+
+      return await this.propertyService.createProperty(input);
+   }
+
 
 }

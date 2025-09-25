@@ -1,5 +1,12 @@
 console.log('Hello, World!');
 
+// TASK-ZO:
+
+// Shunday function yozing, u parametrdagi string 
+// ichidagi qavslar miqdori balansda ekanligini aniqlasin. 
+// Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
+// MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") 
+// return true oddiy for loopda tuzaylik, typescriptda
 
 function areParenthesesBalanced(str: string): boolean {
   let balance = 0;

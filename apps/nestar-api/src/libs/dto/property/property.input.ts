@@ -64,5 +64,5 @@ export class PropertyInput {
 
    @IsOptional()
    @Field(() => Date, { nullable: true })
-   constructoredAt?: Date;
+   constructedAt?: Date;
 }

@@ -104,7 +104,7 @@ const PropertySchema = new Schema(
 			type: Date,
 		},
 
-		constructoredAt: {
+		constructedAt: {
 			type: Date,
 		},
 	},

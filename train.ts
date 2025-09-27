@@ -1,5 +1,31 @@
 console.log('Hello, World!');
 
+// TASK-ZP:
+
+// Shunday function yozing, u parametridagi string ichidagi raqam va sonlarni sonini sanasin.
+// MASALAN: countNumberAndLetters(“string152%\¥”) return {number:3, letter:6}
+
+function countNumberAndLetters(str: string): { number: number; letter: number } {
+  let number = 0;
+  let letter = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    const ch = str[i];
+
+    if (/[0-9]/.test(ch)) {
+      number++;
+    } else if (/[a-zA-Z]/.test(ch)) {
+      letter++;
+    }
+  }
+
+  return { number, letter };
+}
+
+console.log(countNumberAndLetters("stringofletter231324152%¥")); 
+
+
+
 // TASK-ZO:
 
 // Shunday function yozing, u parametrdagi string 
@@ -8,29 +34,29 @@ console.log('Hello, World!');
 // MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda") 
 // return true oddiy for loopda tuzaylik, typescriptda
 
-function areParenthesesBalanced(str: string): boolean {
-  let balance = 0;
+// function areParenthesesBalanced(str: string): boolean {
+//   let balance = 0;
 
-  for (let i = 0; i < str.length; i++) {
-    const char = str[i];
+//   for (let i = 0; i < str.length; i++) {
+//     const char = str[i];
 
-    if (char === "(") {
-      balance++;
-    } else if (char === ")") {
-      balance--;
-    }
+//     if (char === "(") {
+//       balance++;
+//     } else if (char === ")") {
+//       balance--;
+//     }
 
-    if (balance < 0) {
-      return false;
-    }
-  }
+//     if (balance < 0) {
+//       return false;
+//     }
+//   }
 
-  return balance === 0;
-}
+//   return balance === 0;
+// }
 
-console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda")); 
-console.log(areParenthesesBalanced("((test)")); 
-console.log(areParenthesesBalanced(")(")); 
+// console.log(areParenthesesBalanced("string()ichida(qavslar)soni()balansda")); 
+// console.log(areParenthesesBalanced("((test)")); 
+// console.log(areParenthesesBalanced(")(")); 
 
 // TASK ZN:
 

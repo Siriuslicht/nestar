@@ -8,7 +8,7 @@ export class PropertyInput {
    @IsNotEmpty()
    @Field(() => PropertyType)
    propertyType: PropertyType;
-
+   
    @IsNotEmpty()
    @Field(() => PropertyLocation)
    propertyLocation: PropertyLocation;

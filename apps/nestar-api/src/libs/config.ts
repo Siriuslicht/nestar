@@ -5,8 +5,8 @@ export const availableMembersSorts = ['createAt', 'updateAt', 'memberViews', 'me
 
 export const availableOptions = ['propertyBarter', 'propertyRent'];
 export const availablePropertySorts = [
-	'createAt',
-	'updateAt',
+	'createdAt',
+	'updatedAt',
 	'propertyViews',
 	'propertyLikes',
 	'propertyRank',

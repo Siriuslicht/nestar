@@ -194,7 +194,7 @@ export class AgentPropertiesInquiry {
 	@Field(() => Direction, { nullable: true })
 	direction?: Direction;
 
-	@IsNotEmpty()
+	@IsOptional ()
 	@Field(() => APIsearch, { nullable: true })
 	search?: APIsearch;
 }
@@ -202,7 +202,7 @@ export class AgentPropertiesInquiry {
 @InputType()
 class ALPIsearch {
 	@IsOptional()
-	@Field(() => PropertyStatus, { nullable: true })
+	@Field(() => PropertyStatus, { nullable: true }) 
 	propertyStatus?: PropertyStatus;
 
 	@IsOptional()
@@ -232,6 +232,6 @@ export class AllPropertiesInquiry {
 	direction?: Direction;
 
 	@IsNotEmpty()
-	@Field(() => ALPIsearch, { nullable: true })
-	search?: ALPIsearch;
+	@Field(() => ALPIsearch)
+	search: ALPIsearch;
 }

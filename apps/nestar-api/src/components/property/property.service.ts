@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, now, ObjectId } from 'mongoose';
 import { Properties, Property } from '../../libs/dto/property/property';
 import {
-	AgentPropertiesInquery,
-	AllPropertiesInquery,
-	PropertiesInquery,
+	AgentPropertiesInquiry,
+	AllPropertiesInquiry,
+	PropertiesInquiry,
 	PropertyInput,
 } from '../../libs/dto/property/property.input';
 import { Direction, Message } from '../../libs/enums/common.enum';
@@ -27,6 +27,7 @@ export class PropertyService {
 		private readonly viewService: ViewService,
 	) {}
 
+
 	public async createProperty(input: PropertyInput): Promise<Property> {
 		try {
 			const result = await this.propertyModel.create(input);
@@ -44,6 +45,7 @@ export class PropertyService {
 			throw new InternalServerErrorException(Message.CREATE_FAILED);
 		}
 	}
+
 
 	public async getProperty(memberId: ObjectId, propertyId: ObjectId): Promise<Property> {
 		const search: T = {
@@ -70,6 +72,7 @@ export class PropertyService {
 		return targerProperty;
 	}
 
+
 	public async propertyStatsEditor(input: StatisticModifier): Promise<Member> {
 		const { _id, targetKey, modifier } = input;
 		return await this.propertyModel.findOneAndUpdate(
@@ -77,6 +80,7 @@ export class PropertyService {
          { $inc: { [targetKey]: modifier } }, 
          { new: true });
 	}
+
 
 	public async updateProperty(memberId: ObjectId, input: PropertyUpdate): Promise<Property> {
 		let { propertyStatus, soldAt, deletedAt } = input;
@@ -108,8 +112,9 @@ export class PropertyService {
 
 		return result;
 	}
+
  
-	public async getProperties(memberId: ObjectId, input: PropertiesInquery): Promise<Properties> {
+	public async getProperties(memberId: ObjectId, input: PropertiesInquiry): Promise<Properties> {
 		const match: T = { propertyStatus: PropertyStatus.ACTIVE };
 		const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };
 
@@ -138,7 +143,8 @@ export class PropertyService {
 		return result[0];
 	}
 
-	private shapeMatchQuery(match: T, input: PropertiesInquery): void {
+
+	private shapeMatchQuery(match: T, input: PropertiesInquiry): void {
 		const {
 			memberId,
 			locationList,
@@ -171,7 +177,8 @@ export class PropertyService {
 		}
 	}
 
-	public async getAgentProperties(memberId: ObjectId, input: AgentPropertiesInquery): Promise<Properties> {
+
+	public async getAgentProperties(memberId: ObjectId, input: AgentPropertiesInquiry): Promise<Properties> {
 		const { propertyStatus } = input.search;
 		if (propertyStatus === PropertyStatus.DELETE) throw new BadRequestException(Message.NOT_ALLOWED_REQUEST);
 
@@ -205,7 +212,8 @@ export class PropertyService {
 		return result[0];
 	}
 
-	public async getAllPropertiesByAdmin(memberId: ObjectId, input: AllPropertiesInquery): Promise<Properties> {
+
+	public async getAllPropertiesByAdmin(memberId: ObjectId, input: AllPropertiesInquiry): Promise<Properties> {
 		const { propertyStatus, propertyLocationList } = input.search;
 		const match: T = {};
 		const sort: T = { [input.sort ?? 'createdAt']: input.direction ?? Direction.DESC };
@@ -222,9 +230,9 @@ export class PropertyService {
 					$facet: {
 						list: [
 							{ $skip: (input.page - 1) * input.limit },
-							{ $limit: input.limit },
-							lookupMember,
-							{ $unwind: '$memberData' },
+							{ $limit: input.limit }, //[property1, property2]
+							lookupMember,			// memberData: [memberDataValue]
+							{ $unwind: '$memberData' }, // memberData: memberDataValue
 						],
 						metaCounter: [{ $count: 'total' }],
 					},
@@ -236,6 +244,7 @@ export class PropertyService {
 
 		return result[0];
 	}
+
 
 	public async updatePropertyByAdmin(input: PropertyUpdate): Promise<Property> {
 		const { propertyStatus, soldAt, deletedAt } = input;
@@ -274,4 +283,5 @@ export class PropertyService {
 
 		return result;
 	}
+
 }

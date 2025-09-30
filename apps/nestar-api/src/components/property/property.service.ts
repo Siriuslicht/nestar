@@ -15,8 +15,9 @@ import { PropertyStatus, PropertyType } from '../../libs/enums/property.enum';
 import { StatisticModifier, T } from '../../libs/types/common';
 import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
-import { PropertyUpdate } from '../../libs/dto/property/property.update';
 import { lookupMember, shapeIntoMongoObjectId } from '../../libs/config';
+import { PropertyUpdate } from '../../libs/dto/property/property.update'; 
+import * as moment from "moment";
 
 @Injectable()
 export class PropertyService {
@@ -85,10 +86,16 @@ export class PropertyService {
 			propertyStatus: PropertyStatus.ACTIVE,
 		};
 
-		if (propertyStatus === PropertyStatus.SOLD) input.soldAt = new Date();
-		else if (propertyStatus === PropertyStatus.DELETE) input.deletedAt = new Date();
+		if (propertyStatus === PropertyStatus.SOLD) soldAt = moment().toDate();
+		else if (propertyStatus === PropertyStatus.DELETE) deletedAt = moment().toDate();
 
-		const result: Property = await this.propertyModel.findOneAndUpdate(search, input, { new: true }).exec();
+		const result: Property = await this.propertyModel
+      .findOneAndUpdate(
+         search, 
+         input, 
+         { new: true }
+      ).exec();
+
 		if (!result) throw new InternalServerErrorException(Message.UPDATE_FAILED);
 
 		if (soldAt || deletedAt) {
@@ -101,7 +108,7 @@ export class PropertyService {
 
 		return result;
 	}
-
+ 
 	public async getProperties(memberId: ObjectId, input: PropertiesInquery): Promise<Properties> {
 		const match: T = { propertyStatus: PropertyStatus.ACTIVE };
 		const sort: T = { [input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC };

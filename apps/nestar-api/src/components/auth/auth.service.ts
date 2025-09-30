@@ -23,7 +23,8 @@ export class AuthService {
       console.log("member:", member);
       const payload: T = {  };
 
-      Object.keys(member['_doc'] ? member['_doc'] : member).map((ele) => {       
+      Object.keys(member['_doc'] ? member['_doc'] : member).map((ele) => { 
+         payload[`${ele}`] = member[`${ele}`];      
       })
 
       delete payload.memberPassword;

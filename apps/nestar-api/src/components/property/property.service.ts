@@ -12,7 +12,7 @@ import { Direction, Message } from '../../libs/enums/common.enum';
 import { MemberService } from '../member/member.service';
 import { Member } from '../../libs/dto/member/member';
 import { PropertyStatus, PropertyType } from '../../libs/enums/property.enum';
-import { StatisticModifier, T } from '../../libs/types/common';
+import { StatisticsModifier, T } from '../../libs/types/common';
 import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
 import { lookupMember, shapeIntoMongoObjectId } from '../../libs/config';
@@ -73,7 +73,7 @@ export class PropertyService {
 	}
 
 
-	public async propertyStatsEditor(input: StatisticModifier): Promise<Member> {
+	public async propertyStatsEditor(input: StatisticsModifier): Promise<Member> {
 		const { _id, targetKey, modifier } = input;
 		return await this.propertyModel.findOneAndUpdate(
          _id, 

@@ -30,6 +30,7 @@ export class PropertyResolver {
       return await this.propertyService.createProperty(input);
    }
 
+
    @UseGuards(WithoutGuard)  
    @Query(() => Property) // notification to graphQL that it can access this method.
    public async getProperty(
@@ -40,6 +41,7 @@ export class PropertyResolver {
       const propertyId = shapeIntoMongoObjectId(input);
       return await this.propertyService.getProperty(memberId, propertyId);
    }
+
 
    @Roles(MemberType.AGENT)
 	@UseGuards(RolesGuard)
@@ -52,6 +54,7 @@ export class PropertyResolver {
 		input._id = shapeIntoMongoObjectId(input._id);
 		return await this.propertyService.updateProperty(memberId, input);
 	}
+
 
    @UseGuards(WithoutGuard)
 	@Query((returns) => Properties)
@@ -90,6 +93,7 @@ export class PropertyResolver {
       return await this.propertyService.getAllPropertiesByAdmin(memberId, input);
    }
 
+
    @Roles(MemberType.ADMIN) 
    @UseGuards(RolesGuard)
    @Mutation((returns) => Property)
@@ -99,6 +103,7 @@ export class PropertyResolver {
       return await this.propertyService.updatePropertyByAdmin(input);
    }
 
+
    @Roles(MemberType.ADMIN)
    @UseGuards(RolesGuard)
    @Mutation((returns) => Property)
@@ -107,4 +112,7 @@ export class PropertyResolver {
       const propertyId = shapeIntoMongoObjectId(input);
       return await this.propertyService.removePropertyByAdmin(propertyId);
    }
+
+
+   
 }

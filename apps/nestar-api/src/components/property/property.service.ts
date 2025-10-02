@@ -53,8 +53,8 @@ export class PropertyService {
 			propertyStatus: PropertyStatus.ACTIVE,
 		};
 
-		const targerProperty = await this.propertyModel.findOne(search).lean().exec();
-		if (!targerProperty) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
+		const targetProperty = await this.propertyModel.findOne(search).lean().exec();
+		if (!targetProperty) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		if (memberId) {
 			const viewInput = { memberId: memberId, viewRefId: propertyId, viewGroup: ViewGroup.PROPERTY };
@@ -62,23 +62,24 @@ export class PropertyService {
 
 			if (newView) {
 				await this.propertyStatsEditor({ _id: propertyId, targetKey: 'propertyViews', modifier: 1 });
-				targerProperty.propertyViews++;
+				targetProperty.propertyViews++;
 			}
 
 			// meLiked
 		}
 
-		targerProperty.memberData = await this.memberService.getMember(null, targerProperty.memberId);
-		return targerProperty;
+		targetProperty.memberData = await this.memberService.getMember(null, targetProperty.memberId);
+		return targetProperty;
 	}
 
 
 	public async propertyStatsEditor(input: StatisticsModifier): Promise<Member> {
 		const { _id, targetKey, modifier } = input;
-		return await this.propertyModel.findOneAndUpdate(
-         _id, 
+		return await this.propertyModel.findByIdAndUpdate(
+			 _id, 
          { $inc: { [targetKey]: modifier } }, 
-         { new: true });
+         { new: true }
+		);
 	}
 
 

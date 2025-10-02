@@ -8,14 +8,16 @@ import { T } from '../../libs/types/common';
 @Injectable()
 export class ViewService {
    constructor(@InjectModel("View") private readonly viewModel: Model<View>) {}
+
+
    public async recordView(input: ViewInput): Promise<View | null> {
       const viewExist = await this.checkViewExistence(input);
       if(!viewExist) {
          console.log("- New View Insert -");
          return await this.viewModel.create(input); 
-      } else return null;
-      return null;           
+      } else return null;                               
    }
+
 
    private async checkViewExistence(input: ViewInput): Promise<View>{
       const {memberId, viewRefId } = input;

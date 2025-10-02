@@ -1,31 +1,58 @@
 console.log('Hello, World!');
 
 
+// TASK-ZP:
+
+// Shunday function yozing, u parametridagi string ichidagi 
+// raqam va sonlarni sonini sanasin.
+// MASALAN: countNumberAndLetters(“string152%\¥”) 
+// return {number:3, letter:6}
+
+
+function countNumberAndLetters(str) {
+  let result = { number: 0, letter: 0 };
+
+  for (let ch of str) {
+    if (/[0-9]/.test(ch)) {
+      result.number++;
+    } else if (/[a-zA-Z]/.test(ch)) {
+      result.letter++;
+    }
+  }
+
+  return result;
+}
+
+
+console.log(countNumberAndLetters("laborism1288310(*$(#&$"));
+
+
+
 // TASK ZQ:
 
 // Shunday function yozing, u parametridagi array 
 // ichida 2 marta qaytarilgan sonlarni alohida araryda qaytarsin.
 // MASALAN: findDuplicates([1,2,3,4,5,4,3,4]) return [3, 4]
 
-function findDuplicates(arr: number[]): number[] {
-  const countMap: Record<number, number> = {};
-  const duplicates: number[] = [];
+// function findDuplicates(arr: number[]): number[] {
+//   const countMap: Record<number, number> = {};
+//   const duplicates: number[] = [];
 
-  for (const num of arr) {
-    countMap[num] = (countMap[num] || 0) + 1;
-  }
+//   for (const num of arr) {
+//     countMap[num] = (countMap[num] || 0) + 1;
+//   }
 
-  for (const key in countMap) {
-    if (countMap[key] > 1) {
-      duplicates.push(Number(key));
-    }
-  }
+//   for (const key in countMap) {
+//     if (countMap[key] > 1) {
+//       duplicates.push(Number(key));
+//     }
+//   }
 
-  return duplicates;
-}
+//   return duplicates;
+// }
 
 
-console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4, 1]));
+// console.log(findDuplicates([1, 2, 3, 4, 5, 4, 3, 4, 1]));
 
 
 

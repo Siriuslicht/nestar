@@ -8,6 +8,7 @@ import { ViewModule } from '../view/view.module';
 import CommentSchema from '../../schemas/Comment.model';
 import { BoardArticleModule } from '../board-article/board-article.module';
 import { PropertyModule } from '../property/property.module';
+import { Mutation } from '@nestjs/graphql';
 
 @Module({
   imports: [

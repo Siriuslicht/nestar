@@ -14,7 +14,7 @@ export class MeLiked {
 	myFavorite: boolean;
 }
 
-@ObjectType()
+@ObjectType()  
 export class Like {
 	@Field(() => String)
 	_id: ObjectId;

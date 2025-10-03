@@ -93,7 +93,7 @@ export class MemberResolver {
       @Args("memberId") input: string,
       @AuthMember('_id') memberId: ObjectId,
    ): Promise<Member> {
-      console.log("Mutation: likeTargetMember");
+      console.log("memberId:", memberId);
       const likeRefId = shapeIntoMongoObjectId(input);
       return await this.memberService.likeTargetMember(memberId, likeRefId);
    }

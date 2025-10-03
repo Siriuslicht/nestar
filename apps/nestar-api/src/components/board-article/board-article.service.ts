@@ -60,6 +60,8 @@ export class BoardArticleService {
             targetBoardArticle.articleViews++;
          }
          //meLiked
+         const likeInput = { memberId: memberId, likeRefId: articleId, likeGroup: LikeGroup.ARTICLE};
+         targetBoardArticle.meLiked = await this.likeService.checkLikeExistence(likeInput);
       }
 
       targetBoardArticle.memberData = await this.memberService.getMember(null, targetBoardArticle.memberId);
@@ -108,12 +110,12 @@ export class BoardArticleService {
 
       const result = await this.boardArticleModel
          .aggregate([
-            {$match: match},
+            { $match: match },
             { $sort: sort },
             {
                $facet: {
                   list: [
-                     { $skip: (input.page -1) *input.limit },
+                     { $skip: (input.page -1) * input.limit },
                      { $limit: input.limit },
                      //meLiked
                      lookupMember,

@@ -8,4 +8,4 @@ export interface StatisticsModifier {
    _id: ObjectId;
    targetKey: string;
    modifier: number; 
-}
+} 

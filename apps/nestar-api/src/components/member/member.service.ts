@@ -123,7 +123,7 @@ export class MemberService  {
    }
 
 
-   /** LikeMember */
+   /** LIKE */
 
   public async likeTargetMember(memberId: ObjectId, likeRefId: ObjectId): Promise<Member> {
       const target: Member = await this.memberModel.findOne(

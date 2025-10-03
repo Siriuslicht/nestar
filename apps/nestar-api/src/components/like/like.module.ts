@@ -12,6 +12,6 @@ import { MongooseModule } from '@nestjs/mongoose';
     ]),
   ],
   providers: [LikeService],
-  exports: [LikeService],
+  exports: [LikeService], 
 })
 export class LikeModule {}

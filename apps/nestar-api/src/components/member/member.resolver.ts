@@ -83,6 +83,20 @@ export class MemberResolver {
       console.log("Query: getAgents");
       return await this.memberService.getAgents(memberId, input);
    }
+   
+
+   /** Like **/
+
+   @UseGuards(AuthGuard)
+   @Mutation((returns) => Member)
+   public async likeTargetMember(
+      @Args("memberId") input: string,
+      @AuthMember('_id') memberId: ObjectId,
+   ): Promise<Member> {
+      console.log("Mutation: likeTargetMember");
+      const likeRefId = shapeIntoMongoObjectId(input);
+      return await this.memberService.likeTargetMember(memberId, likeRefId);
+   }
 
 
    /** ADMIN */
@@ -108,32 +122,32 @@ export class MemberResolver {
    /** UPLOADER */
 
    @UseGuards(AuthGuard)
-@Mutation((returns) => String)
-public async imageUploader(
-	@Args({ name: 'file', type: () => GraphQLUpload })
-{ createReadStream, filename, mimetype }: FileUpload,
-@Args('target') target: String,
-): Promise<string> {
-	console.log('Mutation: imageUploader');
+      @Mutation((returns) => String)
+      public async imageUploader(
+         @Args({ name: 'file', type: () => GraphQLUpload })
+      { createReadStream, filename, mimetype }: FileUpload,
+      @Args('target') target: String,
+      ): Promise<string> {
+         console.log('Mutation: imageUploader');
 
-	if (!filename) throw new Error(Message.UPLOAD_FAILED);
-const validMime = validMimeTypes.includes(mimetype);
-if (!validMime) throw new Error(Message.PROVIDE_ALLOWED_FORMAT);
+         if (!filename) throw new Error(Message.UPLOAD_FAILED);
+      const validMime = validMimeTypes.includes(mimetype);
+      if (!validMime) throw new Error(Message.PROVIDE_ALLOWED_FORMAT);
 
-const imageName = getSerialForImage(filename);
-const url = `uploads/${target}/${imageName}`;
-const stream = createReadStream();
+      const imageName = getSerialForImage(filename);
+      const url = `uploads/${target}/${imageName}`;
+      const stream = createReadStream();
 
-const result = await new Promise((resolve, reject) => {
-	stream
-		.pipe(createWriteStream(url))
-		.on('finish', async () => resolve(true))
-		.on('error', () => reject(false));
-});
-if (!result) throw new Error(Message.UPLOAD_FAILED);
+      const result = await new Promise((resolve, reject) => {
+         stream
+            .pipe(createWriteStream(url))
+            .on('finish', async () => resolve(true))
+            .on('error', () => reject(false));
+      });
+      if (!result) throw new Error(Message.UPLOAD_FAILED);
 
-return url;
-}
+      return url;
+      }
 
    @UseGuards(AuthGuard)
    @Mutation((returns) => [String])

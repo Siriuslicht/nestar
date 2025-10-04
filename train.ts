@@ -1,6 +1,36 @@
 console.log('Hello, World!');
 
 
+// TASK ZS:
+
+// Shunday function yozing, bu function parametrdagi array ichida
+// bir marotaba takrorlangan element'ni qaytarsin
+
+// MASALAN: singleNumber([4, 2, 1, 2, 1]); return 4;
+
+
+
+function singleNumber(arr: number[]): number {
+  const map: Record<number, number> = {};
+
+  for (const num of arr) {
+    map[num] = (map[num] || 0) + 1;
+  }
+
+  for (const key in map) {
+    if (map[key] === 1) {
+      return Number(key);
+    }
+  }
+
+  throw new Error("No single number found");
+}
+
+console.log(singleNumber([4, 2, 1, 2, 1])); // 4
+
+
+
+
 // TASK-ZP:
 
 // Shunday function yozing, u parametridagi string ichidagi 
@@ -9,22 +39,22 @@ console.log('Hello, World!');
 // return {number:3, letter:6}
 
 
-function countNumberAndLetters(str) {
-  let result = { number: 0, letter: 0 };
+// function countNumberAndLetters(str) {
+//   let result = { number: 0, letter: 0 };
 
-  for (let ch of str) {
-    if (/[0-9]/.test(ch)) {
-      result.number++;
-    } else if (/[a-zA-Z]/.test(ch)) {
-      result.letter++;
-    }
-  }
+//   for (let ch of str) {
+//     if (/[0-9]/.test(ch)) {
+//       result.number++;
+//     } else if (/[a-zA-Z]/.test(ch)) {
+//       result.letter++;
+//     }
+//   }
 
-  return result;
-}
+//   return result;
+// }
 
 
-console.log(countNumberAndLetters("laborism1288310(*$(#&$"));
+// console.log(countNumberAndLetters("laborism1288310(*$(#&$"));
 
 
 

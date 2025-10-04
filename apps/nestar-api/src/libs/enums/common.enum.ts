@@ -19,6 +19,7 @@ export enum Message {
    NOT_ALLOWED_REQUEST = "Not allowed Request!",
    PROVIDE_ALLOWED_FORMAT = "Please provide jpg, jpeg or png images!",
    SELF_SUBSCRIPTION_DENIED = "Self subscription is denied!",
+   BAD_REQUEST = "BAD_REQUEST",
 }
 
 export enum Direction {

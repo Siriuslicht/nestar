@@ -25,9 +25,11 @@ export const getSerialForImage = (filename: string) => {
 	return uuidv4() + ext;
 };
 
+
 export const shapeIntoMongoObjectId = (target: any) => {
 	return typeof target === 'string' ? new ObjectId(target) : target;
 };
+
 
 export const lookupMember = {
 	$lookup: {
@@ -37,3 +39,22 @@ export const lookupMember = {
 		as: 'memberData',
 	},
 };
+
+
+export const lookupFollowingData = {
+	$lookup: {
+		from: 'members',
+		localField: 'followingId',
+		foreignField: '_id',
+		as: 'followingData'
+	},
+}
+
+export const lookupFollowerData = {
+	$lookup: {
+		from: 'members',
+		localField: 'followerId',
+		foreinField: '_id',
+		as: 'followerData',
+	},
+}

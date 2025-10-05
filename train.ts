@@ -1,6 +1,30 @@
 console.log('Hello, World!');
 
 
+// TASK-ZT:
+
+// Shunday function yozing, u parametridagi 
+// string ichida 1 martadan ortiq qaytarilmagan 
+// birinchi harf indeksini qaytarsin.
+// MASALAN: firstUniqueCharIndex(“stamp”) return 0
+
+function firstUniqueCharIndex(str: string): number {
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    if (str.indexOf(char) === str.lastIndexOf(char)) {
+      return i;
+    }
+  }
+  return -1; 
+}
+
+console.log(firstUniqueCharIndex("stamp")); 
+console.log(firstUniqueCharIndex("success")); 
+
+// str.indexOf(char) → harfning birinchi uchrashgan indeksini qaytaradi.
+// str.lastIndexOf(char) → harfning oxirgi uchrashgan indeksini qaytaradi.
+
+
 // TASK ZS:
 
 // Shunday function yozing, bu function parametrdagi array ichida
@@ -10,23 +34,23 @@ console.log('Hello, World!');
 
 
 
-function singleNumber(arr: number[]): number {
-  const map: Record<number, number> = {};
+// function singleNumber(arr: number[]): number {
+//   const map: Record<number, number> = {};
 
-  for (const num of arr) {
-    map[num] = (map[num] || 0) + 1;
-  }
+//   for (const num of arr) {
+//     map[num] = (map[num] || 0) + 1;
+//   }
 
-  for (const key in map) {
-    if (map[key] === 1) {
-      return Number(key);
-    }
-  }
+//   for (const key in map) {
+//     if (map[key] === 1) {
+//       return Number(key);
+//     }
+//   }
 
-  throw new Error("No single number found");
-}
+//   throw new Error("No single number found");
+// }
 
-console.log(singleNumber([4, 2, 1, 2, 1])); // 4
+// console.log(singleNumber([4, 2, 1, 2, 1])); // 4
 
 
 

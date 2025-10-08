@@ -36,7 +36,7 @@ export const lookupAuthMemberLiked = (memberId: T, targetRefId: string = "$_id")
 	return {
 		$lookup: {
 			from: "likes",
-			let: {
+			let: {	
 				localLikeRefId: targetRefId,
 				localMemberId: memberId,
 				localMyFavorite: true
@@ -124,7 +124,16 @@ export const lookupFollowerData = {
 	$lookup: {
 		from: 'members',
 		localField: 'followerId',
-		foreinField: '_id',
+		foreignField: '_id',
 		as: 'followerData',
+	},
+}
+
+export const lookupFavorite = {
+	$lookup: {
+		from: 'members',
+		localField: 'favoriteProperty.memberId',
+		foreignField: '_id',
+		as: 'favoriteProperty.memberData',
 	},
 }

@@ -1,10 +1,16 @@
 import { Logger } from '@nestjs/common';
 import { OnGatewayInit, SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
-import { Server } from 'ws';
+import { Server } from 'ws';  
 
-@WebSocketGateway({transports: ["websocket"], secure: false})
+@WebSocketGateway( 
+  {
+  transports: ["websocket"], 
+  secure: false
+  }
+)
+
 export class SocketGateway implements OnGatewayInit{
-  private logger: Logger = new Logger("SocketEventsGateway")
+  private logger: Logger = new Logger("SocketEventsGateway")  
   private summaryClient: number = 0;
   
   public afterInit(server: Server){
@@ -14,7 +20,7 @@ export class SocketGateway implements OnGatewayInit{
   handleConnection(client: WebSocket, ...args: any[]) {
     this.summaryClient++;
     this.logger.log(`== Total Clients Connected: ${this.summaryClient} ==`);
-  }
+  } 
 
   handleDisconnect(client: WebSocket) {
     this.summaryClient--;

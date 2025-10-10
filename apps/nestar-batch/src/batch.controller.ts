@@ -8,46 +8,46 @@ export class BatchController {
   private logger: Logger = new Logger("BatchController")  
   constructor(private readonly batchService: BatchService) {}
 
-  @Cron("00 * * * * *", {name: BATCH_ROLLBACK})
-  public async batchRollback() {
+  @Timeout(3000)
+  handleTimeout() {
+    this.logger.debug("BATCH SERVER READY!");
+  }
+
+  @Cron("00 * * * * *", {name: BATCH_ROLLBACK})//for schedulerRegistry.getCronJob(),
+  public async batchRollback() { 
     try {
       this.logger["context"] = BATCH_ROLLBACK;
       this.logger.debug("EXECUTED!")
       await this.batchService.batchRollback();
     } catch(err) {
-      this.logger.debug(err);
+      this.logger.error(err);
     }
   }   
 
-  @Cron("20 * * * * *", {name: BATCH_TOP_PROPERTIES})
-  public async batchProperties() {
+  @Cron("20 * * * * *", {name: BATCH_TOP_PROPERTIES})//for schedulerRegistry.getCronJob(),
+  public async batchTopProperties() {
     try {
       this.logger["context"] = BATCH_TOP_PROPERTIES;
       this.logger.debug("EXECUTED!")
       await this.batchService.batchProperties();
     } catch (err) {
-      this.logger.debug(err);
+      this.logger.error(err);
     }
   }   
 
-  @Cron("40 * * * * *", {name: BATCH_TOP_AGENTS})
-  public async batchAgents() {
+  @Cron("40 * * * * *", {name: BATCH_TOP_AGENTS})// for 
+  public async batchTopAgents() {
     try {
       this.logger["context"] = BATCH_TOP_AGENTS;
       this.logger.debug("EXECUTED!")
       await this.batchService.batchAgents();
     } catch (err) {
-      this.logger.debug(err)
+      this.logger.error(err)
     }
   }   
 
-
   /**
    * 
-  @Timeout(3000)
-  handleTimeout() {
-    this.logger.debug("BATCH SERVER READY!");
-  }
   @Interval(1000)
   handleInterval() {
     this.logger.debug("INTERVAL TEST")

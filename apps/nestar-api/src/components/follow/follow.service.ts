@@ -18,13 +18,17 @@ export class FollowService {
    ) {}
 
    public async subscribe(followerId: ObjectId, followingId: ObjectId): Promise<Follower>{
+      
+            console.log("followerId:", followerId);
+            console.log("followingId:", followingId);
       if(followerId.toString() === followingId.toString()) {
          throw new InternalServerErrorException(Message.SELF_SUBSCRIPTION_DENIED);
       }
 
+
       const targetMember = await this.memberService.getMember(null, followingId);
       if(!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
-
+ 
       const result = await this.registerSubscription(followerId, followingId);
 
       await this.memberService.memberStatsEditor({ _id: followerId, targetKey: 'memberFollowings', modifier: 1})

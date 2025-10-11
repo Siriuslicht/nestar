@@ -35,7 +35,7 @@ export class BatchController {
     }
   }   
 
-  @Cron("40 * * * * *", {name: BATCH_TOP_AGENTS})// for 
+  @Cron("40 * * * * *", {name: BATCH_TOP_AGENTS})// for  
   public async batchTopAgents() {
     try {
       this.logger["context"] = BATCH_TOP_AGENTS;
